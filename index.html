@@ -1,19 +1,15 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="icon" href="https://user-images.githubusercontent.com/93479842/258611073-b4ab9185-1fe9-4194-ae71-6406cae69249.png" type="image/x-icon">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <title>Where is my Ip</title>
-    
+    <title>Where is my Ip</title>    
 </head>
-
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-4" style="font-size: 15pt;">
         <a class="navbar-brand" href="#">IpLocator</a>
@@ -32,21 +28,26 @@
     <div class="container-fluid text-center bg-primar pb-5 text-light" style="background-color: #063970; padding-top: 10vh;">
         <h1 class="fs-1"><u>IP Address Information</u></h1>
 
-        <div class="pb-3 pt-3"><span style="font-size: 20pt;">Public IPv4: <span id="ipv4"></span> <span
-                    onclick="copyToClipboard('ipv4')" class="clipboard-btn" title="Copy to Clipboard"><img
-                        src="./copy-to-clipboard.png" alt="copy to clipboard image" id="ipv4CopyImage"></span></div>
+        <div class="pb-3 pt-3"><span style="font-size: 20pt;">Public IPv4: <span id="ipv4"></span>
+            <span onclick="copyToClipboard('ipv4')" class="clipboard-btn" title="Copy to Clipboard">
+                <img src="./copy-to-clipboard.png" alt="copy to clipboard image" id="ipv4CopyImage">
+            </span>
+        </div>
 
-        <div class="pb-3"><span style="font-size: 20pt;">Public IPv6: <span id="ipv6"></span></span> <span
-                onclick="copyToClipboard('ipv6')"><img src="./copy-to-clipboard.png" alt="copy to clipboard image"
-                    id="ipv6CopyImage"></span></div>
+        <div class="pb-3"><span style="font-size: 20pt;">Public IPv6: <span id="ipv6"></span></span> 
+            <span onclick="copyToClipboard('ipv6')"><img src="./copy-to-clipboard.png" alt="copy to clipboard image" id="ipv6CopyImage">
+            </span>
+        </div>
 
-        <div class="pb-3"><span style="font-size: 20pt;">IP Location: <span id="location"></span></span> <span
-                onclick="copyToClipboard('location')"><img src="./copy-to-clipboard.png" alt="copy to clipboard image"
-                    id="locationCopyImage"></span></div>
+        <div class="pb-3"><span style="font-size: 20pt;">IP Location: <span id="location"></span></span> 
+            <span onclick="copyToClipboard('location')"><img src="./copy-to-clipboard.png" alt="copy to clipboard image" id="locationCopyImage">
+            </span>
+        </div>
 
-        <div class="pb-3"> <span style="font-size: 20pt;">ISP: <span id="isp"></span></span> <span
-                onclick="copyToClipboard('isp')"><img src="./copy-to-clipboard.png" alt="copy to clipboard image"
-                    id="ispCopyImage"></span></div>
+        <div class="pb-3"> <span style="font-size: 20pt;">ISP: <span id="isp"></span></span> 
+            <span onclick="copyToClipboard('isp')"><img src="./copy-to-clipboard.png" alt="copy to clipboard image" id="ispCopyImage">
+            </span>
+        </div>
     </div>
 
     <div class="container py-5 ">
@@ -123,12 +124,9 @@
         }
 
         fetchIPv6();
-
         setTimeout(fetchIPv4, 1000);
-
     </script>
-
-
+    
     <script>
         function copyToClipboard(elementId) {
             const textToCopy = document.getElementById(elementId).textContent;
@@ -168,5 +166,4 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 </body>
-
 </html>
