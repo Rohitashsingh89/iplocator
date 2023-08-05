@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Where is my Ip</title>
+    <style>
+        /* Custom CSS to center-align the navbar content */
+        .navbar-nav {
+            flex-grow: 1;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
+        <a class="navbar-brand" href="#">IpLocator</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid text-center bg-primary pb-5 text-light" style="padding-top: 10vh;">
+        <h1 class="fs-1"><u>IP Address Information</u></h1>
+
+        <div class="pb-3 pt-3"><span style="font-size: 20pt;">Public IPv4: <span id="ipv4"></span> <span
+                    onclick="copyToClipboard('ipv4')" class="clipboard-btn" title="Copy to Clipboard"><img
+                        src="./copy-to-clipboard.png" alt="copy to clipboard image" id="ipv4CopyImage"></span></div>
+
+        <div class="pb-3"><span style="font-size: 20pt;">Public IPv6: <span id="ipv6"></span></span> <span
+                onclick="copyToClipboard('ipv6')"><img src="./copy-to-clipboard.png" alt="copy to clipboard image"
+                    id="ipv6CopyImage"></span></div>
+
+        <div class="pb-3"><span style="font-size: 20pt;">IP Location: <span id="location"></span></span> <span
+                onclick="copyToClipboard('location')"><img src="./copy-to-clipboard.png" alt="copy to clipboard image"
+                    id="locationCopyImage"></span></div>
+
+        <div class="pb-3"> <span style="font-size: 20pt;">ISP: <span id="isp"></span></span> <span
+                onclick="copyToClipboard('isp')"><img src="./copy-to-clipboard.png" alt="copy to clipboard image"
+                    id="ispCopyImage"></span></div>
+    </div>
+
+    <div class="container py-5 ">
+    <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body text-center py-5">
+              <h5 class="card-title py-2">Find Ip Location </h5>
+              <p class="card-text py-2">Find IP Address Location
+                Use this IP address lookup tool to find the location of any IP address. Get details such as the originating city, state/region, postal/zip code, country name, ISP, and time zone.</p>
+              <a href="#" class="btn btn-warning">Find IP Location</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body text-center py-5">
+                  <h5 class="card-title py-2">Find Someone Online for free </h5>
+                  <p class="card-text py-2">Learn to find someone online using free tools. Whether you have their name, phone number, username, email address or IP address, this tutorial will guide you step by step.
+                  </p>
+                  <a href="#" class="btn btn-warning">Find Someone</a>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-light text-center text-lg-start">
+        <!-- Copyright -->
+        <div class="text-center p-4 " style="font-size: 15pt; background-color: rgba(0, 0, 0, 0.2);">
+            <span>made with ❤️ By </span>
+          <a class="text-dark" href="https://rohitashsingh.vercel.app/">Rohitash Singh</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+      
+
+    <script>
+        function fetchIPv6() {
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        const ipv6 = xhr.responseText.trim(); // Remove leading/trailing spaces
+                        document.getElementById("ipv6").textContent = ipv6;
+                    } else {
+                        document.getElementById("ipv6").textContent = "Not available";
+                    }
+                }
+            };
+            xhr.open("GET", "https://ipv6.icanhazip.com/", true);
+            xhr.send();
+        }
+
+        function fetchIPv4() {
+            fetch('https://api64.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    const ipv4 = data.ip;
+                    document.getElementById("ipv4").textContent = ipv4;
+
+                    // Get IP Location and ISP using 'ipinfo' API
+                    fetch(`https://ipinfo.io/${ipv4}?token=0f82c3e7c64782`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const ipLocation = data.city + ', ' + data.region + ', ' + data.country;
+                            const isp = data.org;
+                            document.getElementById("location").textContent = ipLocation;
+                            document.getElementById("isp").textContent = isp;
+                        })
+                        .catch(error => console.error("Error fetching IP location and ISP:", error));
+                })
+                .catch(error => console.error("Error fetching IPv4 address:", error));
+        }
+
+        fetchIPv6();
+
+        setTimeout(fetchIPv4, 1000);
+
+    </script>
+
+
+    <script>
+        function copyToClipboard(elementId) {
+            const textToCopy = document.getElementById(elementId).textContent;
+
+            const tempTextArea = document.createElement("textarea");
+            tempTextArea.value = textToCopy;
+            document.body.appendChild(tempTextArea);
+
+            tempTextArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempTextArea);
+
+            const copyImage = document.getElementById(`${elementId}CopyImage`);
+            copyImage.style.display = "inline";
+
+            setTimeout(() => {
+                copyImage.style.display = "none";
+            }, 0);
+
+            document.addEventListener("copy", function (event) {
+                const copiedImages = document.querySelectorAll(".clipboard-btn img");
+                copiedImages.forEach(image => {
+                    image.style.display = "none";
+                });
+            });
+        }
+    </script>
+
+    <!-- Optional JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
