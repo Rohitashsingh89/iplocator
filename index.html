@@ -1,16 +1,29 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="https://user-images.githubusercontent.com/93479842/258611073-b4ab9185-1fe9-4194-ae71-6406cae69249.png" type="image/x-icon">
+    <link rel="icon"
+        href="https://user-images.githubusercontent.com/93479842/258611073-b4ab9185-1fe9-4194-ae71-6406cae69249.png"
+        type="image/x-icon">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Where is my Ip</title>    
+
+    <title>Where is my Ip</title>
+    <!-- axios  -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- dotenv -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/dotenv@10.0.0/dist/dotenv.min.js"></script> -->
+
+
 </head>
+
 <body>
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-4" style="font-size: 15pt;">
         <a class="navbar-brand" href="#">IpLocator</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -25,109 +38,129 @@
             </ul>
         </div>
     </nav>
-    <div class="container-fluid text-center bg-primar pb-5 text-light" style="background-color: #063970; padding-top: 10vh;">
+    <div class="container-fluid text-center bg-primar pb-5 text-light"
+        style="background-color: #063970; padding-top: 10vh;">
         <h1 class="fs-1"><u>IP Address Information</u></h1>
 
-        <div class="pb-3 pt-3"><span style="font-size: 20pt;">Public IPv4: <span id="ipv4"></span>
-            <span onclick="copyToClipboard('ipv4')" class="clipboard-btn" title="Copy to Clipboard">
-                <img src="./copy-to-clipboard.png" alt="copy to clipboard image" id="ipv4CopyImage">
-            </span>
-        </div>
+        <div class="pb-3 pt-3"><span style="font-size: 20pt;">Public IPv4: <span id="ipv4"></span> <span
+                    onclick="copyToClipboard('ipv4')" class="clipboard-btn" title="Copy to Clipboard"><img
+                        src="./copy-to-clipboard.png" alt="copy to clipboard image" id="ipv4CopyImage"></span></div>
 
-        <div class="pb-3"><span style="font-size: 20pt;">Public IPv6: <span id="ipv6"></span></span> 
-            <span onclick="copyToClipboard('ipv6')"><img src="./copy-to-clipboard.png" alt="copy to clipboard image" id="ipv6CopyImage">
-            </span>
-        </div>
+        <div class="pb-3"><span style="font-size: 20pt;">Public IPv6: <span id="ipv6"></span></span> <span
+                onclick="copyToClipboard('ipv6')"><img src="./copy-to-clipboard.png" alt="copy to clipboard image"
+                    id="ipv6CopyImage"></span></div>
 
-        <div class="pb-3"><span style="font-size: 20pt;">IP Location: <span id="location"></span></span> 
-            <span onclick="copyToClipboard('location')"><img src="./copy-to-clipboard.png" alt="copy to clipboard image" id="locationCopyImage">
-            </span>
-        </div>
+        <div class="pb-3"><span style="font-size: 20pt;">IP Location: <span id="location"></span></span> <span
+                onclick="copyToClipboard('location')"><img src="./copy-to-clipboard.png" alt="copy to clipboard image"
+                    id="locationCopyImage"></span></div>
 
-        <div class="pb-3"> <span style="font-size: 20pt;">ISP: <span id="isp"></span></span> 
-            <span onclick="copyToClipboard('isp')"><img src="./copy-to-clipboard.png" alt="copy to clipboard image" id="ispCopyImage">
-            </span>
-        </div>
+        <div class="pb-3"> <span style="font-size: 20pt;">ISP: <span id="isp"></span></span> <span
+                onclick="copyToClipboard('isp')"><img src="./copy-to-clipboard.png" alt="copy to clipboard image"
+                    id="ispCopyImage"></span></div>
+        <div class="pb-3"> <span style="font-size: 20pt;">timezone: <span id="timezone"></span></span> <span
+                onclick="copyToClipboard('timezone')"><img src="./copy-to-clipboard.png" alt="copy to clipboard image"
+                    id="ispCopyImage"></span></div>
+        <div class="pb-3"> <span style="font-size: 20pt;">gmt: <span id="gmt"></span></span> <span
+                onclick="copyToClipboard('gmt')"><img src="./copy-to-clipboard.png" alt="copy to clipboard image"
+                    id="ispCopyImage"></span></div>
     </div>
 
     <div class="container py-5 ">
-    <div class="row">
-        <div class="col-sm-6">
-          <div class="card">
-            <div class="card-body text-center py-5">
-              <h5 class="card-title py-2">Find Ip Location </h5>
-              <p class="card-text py-2">Find IP Address Location
-                Use this IP address lookup tool to find the location of any IP address. Get details such as the originating city, state/region, postal/zip code, country name, ISP, and time zone.</p>
-              <a href="#" class="btn btn-warning">Find IP Location</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body text-center py-5">
-                  <h5 class="card-title py-2">Find Someone Online for free </h5>
-                  <p class="card-text py-2">Learn to find someone online using free tools. Whether you have their name, phone number, username, email address or IP address, this tutorial will guide you step by step.
-                  </p>
-                  <a href="#" class="btn btn-warning">Find Someone</a>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body text-center py-5">
+                        <h5 class="card-title py-2">Find Ip Location </h5>
+                        <p class="card-text py-2">Find IP Address Location
+                            Use this IP address lookup tool to find the location of any IP address. Get details such as
+                            the originating city, state/region, postal/zip code, country name, ISP, and time zone.</p>
+                        <a href="#" class="btn btn-warning">Find IP Location</a>
+                    </div>
                 </div>
-              </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body text-center py-5">
+                        <h5 class="card-title py-2">Find Someone Online for free </h5>
+                        <p class="card-text py-2">Learn to find someone online using free tools. Whether you have their
+                            name, phone number, username, email address or IP address, this tutorial will guide you step
+                            by step.
+                        </p>
+                        <a href="#" class="btn btn-warning">Find Someone</a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
     <footer class="bg-light text-center text-lg-start">
-        <!-- Copyright -->
         <div class="text-center p-4 " style="font-size: 15pt; background-color: rgba(0, 0, 0, 0.2);">
             <span>made with ❤️ By </span>
-          <a class="text-dark" href="https://rohitashsingh.vercel.app/">Rohitash Singh</a>
+            <a class="text-dark" href="https://rohitashsingh.vercel.app/">Rohitash Singh</a>
         </div>
-        <!-- Copyright -->
-      </footer>
-      
+    </footer>
 
     <script>
         function fetchIPv6() {
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        const ipv6 = xhr.responseText.trim(); // Remove leading/trailing spaces
-                        document.getElementById("ipv6").textContent = ipv6;
-                    } else {
-                        document.getElementById("ipv6").textContent = "Not available";
-                    }
+            fetch('https://ipv6.icanhazip.com/')
+                .then(response => response.text())
+                .then(ipv6 => {
+                    document.getElementById("ipv6").textContent = ipv6.trim();
+                })
+                .catch(error => {
+                    document.getElementById("ipv6").textContent = "Not available";
+                });
+        }
+
+        // const axios = require('axios');
+        async function fetchIPv4() {
+
+            const options = {
+                method: 'GET',
+                url: 'https://find-any-ip-address-or-domain-location-world-wide.p.rapidapi.com/iplocation',
+                params: {
+                    apikey: '873dbe322aea47f89dcf729dcc8f60e8'
+                },
+                headers: {
+                    'X-RapidAPI-Key': '1bdaa8532amshe6f9c60b9873d1dp14ead1jsn2857f10eea6d',
+                    'X-RapidAPI-Host': 'find-any-ip-address-or-domain-location-world-wide.p.rapidapi.com'
                 }
             };
-            xhr.open("GET", "https://ipv6.icanhazip.com/", true);
-            xhr.send();
+
+            try {
+                const response = await axios.request(options);
+                console.log(response.data)
+                const ipv4 = response.data.ip;
+                const timezone = response.data.timezone;
+                const gmt = response.data.gmt;
+                document.getElementById("ipv4").textContent = ipv4;
+                document.getElementById("timezone").textContent = timezone;
+                document.getElementById("gmt").textContent = gmt;
+            } catch (error) {
+                document.getElementById("ipv4").textContent = "Not available";
+            }
         }
 
-        function fetchIPv4() {
-            fetch('https://api64.ipify.org?format=json')
+        function fetchIPAddresses() {
+            fetchIPv4();
+            fetchIPv6();
+
+            // Get IP Location and ISP using 'ipinfo' API
+            fetch(`https://ipinfo.io/?token=0f82c3e7c64782`)
                 .then(response => response.json())
                 .then(data => {
-                    const ipv4 = data.ip;
-                    document.getElementById("ipv4").textContent = ipv4;
-
-                    // Get IP Location and ISP using 'ipinfo' API
-                    fetch(`https://ipinfo.io/${ipv4}?token=0f82c3e7c64782`)
-                        .then(response => response.json())
-                        .then(data => {
-                            const ipLocation = data.city + ', ' + data.region + ', ' + data.country;
-                            const isp = data.org;
-                            document.getElementById("location").textContent = ipLocation;
-                            document.getElementById("isp").textContent = isp;
-                        })
-                        .catch(error => console.error("Error fetching IP location and ISP:", error));
+                    const ipLocation = data.city + ', ' + data.region + ', ' + data.country;
+                    const isp = data.org;
+                    document.getElementById("location").textContent = ipLocation;
+                    document.getElementById("isp").textContent = isp;
                 })
-                .catch(error => console.error("Error fetching IPv4 address:", error));
+                .catch(error => console.error("Error fetching IP location and ISP:", error));
         }
 
-        fetchIPv6();
-        setTimeout(fetchIPv4, 1000);
-    </script>
-    
-    <script>
+        fetchIPAddresses();
+
+        setTimeout(fetchIPAddresses, 10000); // Fetch IP addresses every 10 seconds
+
         function copyToClipboard(elementId) {
             const textToCopy = document.getElementById(elementId).textContent;
 
