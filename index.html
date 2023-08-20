@@ -18,26 +18,33 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- dotenv -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/dotenv@10.0.0/dist/dotenv.min.js"></script> -->
-
-
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-4" style="font-size: 15pt;">
-        <a class="navbar-brand" href="#">IpLocator</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <a class="navbar-brand" href="#">Where Is My IP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
             </ul>
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./about.html">About</a>
+            </li>
+          </ul>
+          <div>
+            <a href="./contact.html">
+                <button class="btn btn-warning text-light py-2 px-5" style="font-size: 15pt;">Contact</button>
+            </a>
+          </div>
         </div>
-    </nav>
+      </nav>
     <div class="container-fluid text-center bg-primar pb-5 text-light"
         style="background-color: #063970; padding-top: 10vh;">
         <h1 class="fs-1"><u>IP Address Information</u></h1>
@@ -74,7 +81,7 @@
                         <p class="card-text py-2">Find IP Address Location
                             Use this IP address lookup tool to find the location of any IP address. Get details such as
                             the originating city, state/region, postal/zip code, country name, ISP, and time zone.</p>
-                        <a href="#" class="btn btn-warning">Find IP Location</a>
+                        <a href="#" class="btn btn-warning text-light">Find IP Location</a>
                     </div>
                 </div>
             </div>
@@ -86,7 +93,7 @@
                             name, phone number, username, email address or IP address, this tutorial will guide you step
                             by step.
                         </p>
-                        <a href="#" class="btn btn-warning">Find Someone</a>
+                        <a href="#" class="btn btn-warning text-light">Find Someone</a>
                     </div>
                 </div>
             </div>
@@ -129,7 +136,7 @@
 
             try {
                 const response = await axios.request(options);
-                console.log(response.data)
+                // console.log(response.data)
                 const ipv4 = response.data.ip;
                 const timezone = response.data.timezone;
                 const gmt = response.data.gmt;
@@ -199,4 +206,5 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 </body>
+
 </html>
